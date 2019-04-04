@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DomainDispatcher.Abstractions\DomainDispatcher.Abstractions.csproj" />
+    <Folder Include="Abstractions\" />
   </ItemGroup>
 
 </Project>
