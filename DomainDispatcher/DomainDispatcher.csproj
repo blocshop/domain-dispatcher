@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageProjectUrl>https://github.com/blocshop/domain-dispatcher</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/blocshop/domain-dispatcher/blob/master/LICENSE.md/LICENSE.md</PackageLicenseUrl>
+    <Description>Simple publish subscribe event bus suitable for distributing domain events, well integrated with dependency injection and async handling</Description>
+    <Company>Blocshop</Company>
+    <Authors>Constantine Nalimov, Vojtech Machacek</Authors>
+    <RepositoryUrl>https://github.com/blocshop/domain-dispatcher</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.2.0" />
+    <PackageReference Include="System.Reactive" Version="4.1.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DomainDispatcher.Abstractions\DomainDispatcher.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>
