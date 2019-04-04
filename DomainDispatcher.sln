@@ -3,11 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainDispatcher", "DomainDispatcher\DomainDispatcher.csproj", "{7D15AFFF-5B9B-46B7-B16E-EAC452C31C04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainDispatcher", "DomainDispatcher\DomainDispatcher.csproj", "{7D15AFFF-5B9B-46B7-B16E-EAC452C31C04}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainDispatcher.Abstractions", "DomainDispatcher.Abstractions\DomainDispatcher.Abstractions.csproj", "{AC4FA07D-A7BC-4E80-8172-E116563CB321}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainDispatcher.Test", "DomainDispatcher.Test\DomainDispatcher.Test.csproj", "{6B47EA4D-7B61-43A7-AB8B-474114B75C75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainDispatcher.Test", "DomainDispatcher.Test\DomainDispatcher.Test.csproj", "{6B47EA4D-7B61-43A7-AB8B-474114B75C75}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +17,6 @@ Global
 		{7D15AFFF-5B9B-46B7-B16E-EAC452C31C04}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D15AFFF-5B9B-46B7-B16E-EAC452C31C04}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D15AFFF-5B9B-46B7-B16E-EAC452C31C04}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AC4FA07D-A7BC-4E80-8172-E116563CB321}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AC4FA07D-A7BC-4E80-8172-E116563CB321}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AC4FA07D-A7BC-4E80-8172-E116563CB321}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AC4FA07D-A7BC-4E80-8172-E116563CB321}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6B47EA4D-7B61-43A7-AB8B-474114B75C75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6B47EA4D-7B61-43A7-AB8B-474114B75C75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B47EA4D-7B61-43A7-AB8B-474114B75C75}.Release|Any CPU.ActiveCfg = Release|Any CPU
