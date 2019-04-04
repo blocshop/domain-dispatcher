@@ -9,10 +9,18 @@ namespace DomainDispatcher
 
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddDomainDispatcher(this IServiceCollection containerBuilder)
+        public static IServiceCollection AddDomainDispatcher(this IServiceCollection containerBuilder, Action<DispatchConfigurator> configAction)
         {
-            containerBuilder.AddSingleton<IEventBus, EventBus>();
             containerBuilder.AddSingleton<IEventBusSubscriptionsManager, InMemoryEventBusSubscriptionsManager>();
+
+            containerBuilder.AddSingleton<IEventBus>(serviceProvider =>
+            {
+                var bus = new EventBus(serviceProvider, serviceProvider.GetService<IEventBusSubscriptionsManager>());
+                var configurator = new DispatchConfigurator(serviceProvider, bus);
+                configAction(configurator);
+                return bus;
+            });
+            
             return containerBuilder;
         }
     }

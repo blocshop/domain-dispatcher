@@ -89,7 +89,7 @@
             var handler = OnEventRemoved;
             if (handler != null)
             {
-                OnEventRemoved(this, eventName);
+                //OnEventRemoved(this, eventName);
             }
         }
 

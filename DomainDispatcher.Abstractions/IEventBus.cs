@@ -1,11 +1,12 @@
 ﻿namespace DomainDispatcher.Abstractions
 {
     using System;
+    using System.Threading.Tasks;
     using Events;
 
     public interface IEventBus
     {
-        void Publish(DomainEvent @event);
+        Task PublishAsync(DomainEvent @event);
 
         IDisposable Subscribe<T, TH>()
             where T : DomainEvent
