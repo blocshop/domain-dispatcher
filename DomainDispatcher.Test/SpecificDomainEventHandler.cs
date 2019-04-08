@@ -1,20 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
+using DomainDispatcher.Abstractions;
 
 namespace DomainDispatcher.Test
 {
-    using System.Threading.Tasks;
-    using Abstractions;
 
-    public class SpecificDomainEventHandler : IIntegrationEventHandler<SpecificDomainEvent>
+    public interface ITestService
     {
-        public Task Handle(SpecificDomainEvent @event)
+        void Execute(SpecificDomainEvent @event);
+    }
+
+    public class SpecificDomainEventHandler : IEventHandler<SpecificDomainEvent>
+    {
+
+        private readonly ITestService _testService;
+
+        public SpecificDomainEventHandler(ITestService testService)
         {
-            Console.WriteLine("SpecificDomainEventHandler");
-            Console.WriteLine("Press any key to continue..");
-            Console.ReadLine();
-            return Task.FromResult(true);
+            _testService = testService;
+            
+        }
+
+        public async Task Handle(SpecificDomainEvent @event)
+        {
+            var rnd = new Random();
+            var timeout = rnd.Next(50, 250);
+            await Task.Delay(timeout);
+            _testService.Execute(@event);
         }
     }
 }

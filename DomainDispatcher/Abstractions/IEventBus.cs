@@ -6,10 +6,14 @@
 
     public interface IEventBus
     {
-        Task PublishAsync(DomainEvent @event);
 
-        IDisposable Subscribe<T, TH>()
-            where T : DomainEvent
-            where TH : IIntegrationEventHandler<T>;
+        Task PublishAsync<TEvent>(TEvent @event) 
+            where TEvent : DomainEvent;
+
+
+        IDisposable Subscribe<TEventHandler>() 
+            where TEventHandler : IEventHandler<DomainEvent>;
+
+        IDisposable Subscribe(Type eventHandlerType);
     }
 }

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DomainDispatcher
+﻿namespace DomainDispatcher
 {
+    using System;
     using System.Reactive.Disposables;
     using System.Threading.Tasks;
     using Abstractions;
@@ -21,48 +18,49 @@ namespace DomainDispatcher
             _subsManager = subsManager;
         }
 
-        public async Task PublishAsync(DomainEvent @event)
+        public async Task PublishAsync<TEvent>(TEvent @event)
+            where TEvent: DomainEvent
         {
-            var eventName = @event.GetType().Name;
 
-            if (_subsManager.HasSubscriptionsForEvent(eventName))
+            if (_subsManager.HasSubscriptionsForEvent<TEvent>())
             {
                 var scopeFactory = _provider.GetRequiredService<IServiceScopeFactory>();
 
                 if (scopeFactory == null)
                 {
-                    await InvokeMessageHandlers(eventName, @event, _provider);
+                    await InvokeMessageHandlers(@event, _provider);
                 }
                 else
                 {
                     using (var scope = scopeFactory.CreateScope())
                     {
-                        await InvokeMessageHandlers(eventName, @event, scope.ServiceProvider);
+                        await InvokeMessageHandlers( @event, scope.ServiceProvider);
                     }
                 }
             }
         }
 
-        private async Task InvokeMessageHandlers(string eventName, DomainEvent @event, IServiceProvider provider)
+        private async Task InvokeMessageHandlers<TEvent>(TEvent @event, IServiceProvider provider)
+            where TEvent: DomainEvent
         {
-            var subscriptions = _subsManager.GetHandlersForEvent(eventName);
+            var subscriptions = _subsManager.GetHandlersForEvent<TEvent>();
             foreach (var subscription in subscriptions)
             {
-                var eventType = _subsManager.GetEventTypeByName(eventName);
-                var handler = provider.GetService(subscription.HandlerType);
-
-                var concreteType = typeof(IIntegrationEventHandler<>).MakeGenericType(eventType);
-
-                await (Task)concreteType.GetMethod("Handle").Invoke(handler, new object[] { @event });
+                var handler = (IEventHandler<TEvent>)provider.GetService(subscription.HandlerType);
+                await handler.Handle(@event);
             }
         }
 
-        public IDisposable Subscribe<T, TH>() where T : DomainEvent where TH : IIntegrationEventHandler<T>
+       
+        public IDisposable Subscribe<TEventHandler>() where TEventHandler : IEventHandler<DomainEvent>
         {
-            var eventName = _subsManager.GetEventKey<T>();
-            //DoInternalSubscription(eventName);
-            _subsManager.AddSubscription<T, TH>();
-            return Disposable.Create(_subsManager.RemoveSubscription<T, TH>);
+            return Subscribe(typeof(TEventHandler));
+        }
+
+        public IDisposable Subscribe(Type eventHandlerType) 
+        {
+            _subsManager.AddSubscription(eventHandlerType);
+            return Disposable.Create(() => _subsManager.RemoveSubscription(eventHandlerType) );
         }
     }
 }

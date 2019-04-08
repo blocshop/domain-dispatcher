@@ -8,5 +8,6 @@ namespace DomainDispatcher.Test
 
     public class SpecificDomainEvent : DomainEvent
     {
+        public string MessageData { get; set; }
     }
 }
