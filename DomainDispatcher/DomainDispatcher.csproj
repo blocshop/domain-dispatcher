@@ -8,6 +8,7 @@
     <Company>Blocshop</Company>
     <Authors>Constantine Nalimov, Vojtech Machacek</Authors>
     <RepositoryUrl>https://github.com/blocshop/domain-dispatcher</RepositoryUrl>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
