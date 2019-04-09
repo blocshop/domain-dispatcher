@@ -1,7 +1,8 @@
-﻿namespace DomainDispatcher
+﻿using DomainDispatcher.Helper;
+
+namespace DomainDispatcher
 {
     using System;
-    using System.Reactive.Disposables;
     using System.Threading.Tasks;
     using Abstractions;
     using Abstractions.Events;
